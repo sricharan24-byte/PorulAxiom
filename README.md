@@ -26,4 +26,26 @@ Read [AGENTS.md](AGENTS.md) and the documents in `docs/` before implementation.
 
 ## Next implementation chunk
 
-Initialize a small local Next.js/FastAPI vertical slice: health endpoint, frontend-to-backend connectivity, configuration validation, and tests. It must not implement trading yet.
+Stage 1 now provides a dependency-free FastAPI health endpoint and a minimal Next.js page that checks it. It does not implement trading, identity, database, or market-data features.
+
+## Run locally
+
+In one terminal:
+
+```powershell
+cd backend
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements-dev.txt
+uvicorn app.main:app --reload
+```
+
+In another terminal:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`. The page reports whether the engine at `http://localhost:8000/health` is reachable.
