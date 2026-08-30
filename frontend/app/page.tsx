@@ -8,10 +8,8 @@ import {
   TrendingUp, 
   ShieldCheck, 
   Trophy, 
-  Lock, 
   CheckCircle, 
   ArrowRight, 
-  Layers, 
   Zap,
   Activity
 } from "lucide-react";
