@@ -10,3 +10,4 @@ httpx>=0.27,<1.0
 websockets>=12.0,<16.0
 python-multipart>=0.0.9
 pytest>=8.0,<9.0
+yfinance>=0.2.38
