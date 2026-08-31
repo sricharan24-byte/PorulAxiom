@@ -186,7 +186,7 @@ export class ApiClient {
     });
   }
 
-  static demoLogin(demoType: "admin" | "trader1" | "trader2") {
+  static demoLogin(demoType: "admin" | "trader") {
     return this.request<{ access_token: string; role: string; username: string; user_id: string }>(`/api/auth/demo-login/${demoType}`, {
       method: "POST",
     });

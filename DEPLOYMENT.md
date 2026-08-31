@@ -76,11 +76,7 @@ This guide details how to deploy the PorulAxiom paper trading platform across **
 - **Sole Administrator**:
   - Username: `admin` / Email: `admin@porulaxiom.local`
   - Password: `AdminPass123!`
-- **Demo Trader 1**:
-  - Username: `trader_raj` / Email: `raj@porulaxiom.local`
-  - Password: `TraderPass123!`
-  - Initial Capital: ₹10,00,000.00
-- **Demo Trader 2**:
-  - Username: `trader_priya` / Email: `priya@porulaxiom.local`
+- **Demo Trader (Mokshit)**:
+  - Username: `trader_mokshit` / Email: `mokshit@porulaxiom.local`
   - Password: `TraderPass123!`
   - Initial Capital: ₹10,00,000.00

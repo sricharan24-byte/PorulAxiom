@@ -116,8 +116,8 @@ def get_me(current_user: User = Depends(get_current_active_user)):
 
 @router.post("/demo-login/{demo_type}", response_model=Token)
 def demo_login(demo_type: str, db: Session = Depends(get_db)):
-    """Quick 1-click login for demonstration: 'admin', 'trader1', or 'trader2'."""
-    target_username = "admin" if demo_type == "admin" else ("trader_priya" if demo_type == "trader2" else "trader_raj")
+    """Quick 1-click login for demonstration: 'admin' or 'trader'."""
+    target_username = "admin" if demo_type == "admin" else "trader_mokshit"
     user = db.query(User).filter(func.lower(User.username) == target_username.lower()).first()
 
     if not user:

@@ -1,10 +1,10 @@
 """Tests for Order Placement, Trade Execution, and Holdings Updates."""
 
 def test_market_buy_and_sell_cycle(client):
-    # Login as trader_raj
+    # Login as trader_mokshit
     login_res = client.post(
         "/api/auth/login",
-        json={"username_or_email": "trader_raj", "password": "TraderPass123!"},
+        json={"username_or_email": "trader_mokshit", "password": "TraderPass123!"},
     )
     token = login_res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
@@ -55,7 +55,7 @@ def test_market_buy_and_sell_cycle(client):
 def test_insufficient_funds_rejection(client):
     login_res = client.post(
         "/api/auth/login",
-        json={"username_or_email": "trader_raj", "password": "TraderPass123!"},
+        json={"username_or_email": "trader_mokshit", "password": "TraderPass123!"},
     )
     token = login_res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
@@ -73,7 +73,7 @@ def test_insufficient_funds_rejection(client):
 def test_limit_order_placement_and_cancellation(client):
     login_res = client.post(
         "/api/auth/login",
-        json={"username_or_email": "trader_raj", "password": "TraderPass123!"},
+        json={"username_or_email": "trader_mokshit", "password": "TraderPass123!"},
     )
     token = login_res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}

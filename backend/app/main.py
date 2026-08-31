@@ -96,61 +96,42 @@ def seed_initial_data(db: Session) -> None:
         )
         db.add(admin_user)
     else:
-        # Update hash to ensure valid bcrypt salt
         admin_user.password_hash = get_password_hash("AdminPass123!")
 
-    # 3. Seed Demo Traders
-    demo_traders = [
-        ("b0000000-0000-0000-0000-000000000001", "raj@porulaxiom.local", "trader_raj"),
-        ("b0000000-0000-0000-0000-000000000002", "priya@porulaxiom.local", "trader_priya"),
-    ]
+    # 3. Seed Demo Trader Mokshit
+    demo_trader = db.query(User).filter(User.id == "b0000000-0000-0000-0000-000000000001").first()
+    if not demo_trader:
+        demo_trader = User(
+            id="b0000000-0000-0000-0000-000000000001",
+            email="mokshit@porulaxiom.local",
+            username="trader_mokshit",
+            password_hash=get_password_hash("TraderPass123!"),
+            role="USER",
+            is_active=True,
+        )
+        db.add(demo_trader)
+        db.flush()
 
-    for uid, email, uname in demo_traders:
-        trader = db.query(User).filter(User.id == uid).first()
-        if not trader:
-            trader = User(
-                id=uid,
-                email=email,
-                username=uname,
-                password_hash=get_password_hash("TraderPass123!"),
-                role="USER",
-                is_active=True,
-            )
-            db.add(trader)
-            db.flush()
+        acct = Account(
+            user_id=demo_trader.id,
+            cash_balance=1_000_000.0,
+            currency="INR",
+        )
+        db.add(acct)
 
-            # Account & Initial Grant
-            acct = Account(
-                user_id=uid,
-                cash_balance=1_000_000.0,
-                currency="INR",
-            )
-            db.add(acct)
-
-            ledger = LedgerTransaction(
-                user_id=uid,
-                type="INITIAL_GRANT",
-                amount=1_000_000.0,
-                balance_after=1_000_000.0,
-                description="Initial paper trading virtual balance grant",
-                is_external_flow=True,
-            )
-            db.add(ledger)
-        else:
-            # Update hash to ensure valid bcrypt salt
-            trader.password_hash = get_password_hash("TraderPass123!")
-
-    # 4. Seed Friendship between Raj and Priya
-    f_check = db.query(Friendship).filter(
-        Friendship.requester_id == "b0000000-0000-0000-0000-000000000001",
-        Friendship.addressee_id == "b0000000-0000-0000-0000-000000000002",
-    ).first()
-    if not f_check:
-        db.add(Friendship(
-            requester_id="b0000000-0000-0000-0000-000000000001",
-            addressee_id="b0000000-0000-0000-0000-000000000002",
-            status="ACCEPTED",
-        ))
+        ledger = LedgerTransaction(
+            user_id=demo_trader.id,
+            type="INITIAL_GRANT",
+            amount=1_000_000.0,
+            balance_after=1_000_000.0,
+            description="Initial paper trading virtual balance grant",
+            is_external_flow=True,
+        )
+        db.add(ledger)
+    else:
+        demo_trader.email = "mokshit@porulaxiom.local"
+        demo_trader.username = "trader_mokshit"
+        demo_trader.password_hash = get_password_hash("TraderPass123!")
 
     db.commit()
 

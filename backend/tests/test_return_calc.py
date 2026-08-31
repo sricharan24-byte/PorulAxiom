@@ -4,7 +4,7 @@ def test_capital_adjustment_does_not_inflate_return_percentage(client):
     # 1. Login as user and check baseline return
     u_login = client.post(
         "/api/auth/login",
-        json={"username_or_email": "trader_raj", "password": "TraderPass123!"},
+        json={"username_or_email": "trader_mokshit", "password": "TraderPass123!"},
     )
     u_token = u_login.json()["access_token"]
     u_headers = {"Authorization": f"Bearer {u_token}"}
@@ -13,7 +13,7 @@ def test_capital_adjustment_does_not_inflate_return_percentage(client):
     assert summary_before["return_percentage"] == 0.0
     assert summary_before["net_worth"] == 1000000.0
 
-    # 2. Admin injects ₹500,000 capital into trader_raj's account
+    # 2. Admin injects ₹500,000 capital into trader_mokshit's account
     a_login = client.post(
         "/api/auth/login",
         json={"username_or_email": "admin", "password": "AdminPass123!"},
@@ -42,5 +42,5 @@ def test_capital_adjustment_does_not_inflate_return_percentage(client):
     board_res = client.get("/api/friends/leaderboard", headers=u_headers)
     assert board_res.status_code == 200
     board = board_res.json()
-    raj_entry = next(item for item in board if item["username"] == "trader_raj")
-    assert raj_entry["return_percentage"] == 0.0
+    mokshit_entry = next(item for item in board if item["username"] == "trader_mokshit")
+    assert mokshit_entry["return_percentage"] == 0.0

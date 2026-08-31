@@ -9,7 +9,7 @@ interface AuthContextType {
   loading: boolean;
   login: (credentials: { username_or_email: string; password: string }) => Promise<void>;
   register: (data: { email: string; username: string; password: string }) => Promise<void>;
-  demoLogin: (type: "admin" | "trader1" | "trader2") => Promise<void>;
+  demoLogin: (type: "admin" | "trader") => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
 }
@@ -61,7 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await refreshUser();
   };
 
-  const demoLogin = async (type: "admin" | "trader1" | "trader2") => {
+  const demoLogin = async (type: "admin" | "trader") => {
     const res = await ApiClient.demoLogin(type);
     localStorage.setItem("porulaxiom_token", res.access_token);
     setToken(res.access_token);

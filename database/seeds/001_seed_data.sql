@@ -31,19 +31,19 @@ VALUES (
 )
 ON CONFLICT (id) DO UPDATE SET password_hash = EXCLUDED.password_hash;
 
--- 3. Insert Demo Trader 1 (Password is 'TraderPass123!')
+-- 3. Insert Demo Trader Mokshit (Password is 'TraderPass123!')
 INSERT INTO users (id, email, username, password_hash, role, is_active)
 VALUES (
     'b0000000-0000-0000-0000-000000000001',
-    'raj@porulaxiom.local',
-    'trader_raj',
+    'mokshit@porulaxiom.local',
+    'trader_mokshit',
     '$2b$12$0D951T9OWCaN9lkbfSiyGOuqYrrdRTwbtzgjLDPoWliu1shsxEsZm',
     'USER',
     true
 )
-ON CONFLICT (id) DO UPDATE SET password_hash = EXCLUDED.password_hash;
+ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email, username = EXCLUDED.username, password_hash = EXCLUDED.password_hash;
 
--- Account for Trader Raj (1,000,000 INR starting capital)
+-- Account for Trader Mokshit (1,000,000 INR starting capital)
 INSERT INTO accounts (id, user_id, cash_balance, currency)
 VALUES (
     'c0000000-0000-0000-0000-000000000001',
@@ -62,48 +62,5 @@ VALUES (
     1000000.0000,
     'Initial paper trading virtual balance grant',
     true
-)
-ON CONFLICT DO NOTHING;
-
--- 4. Insert Demo Trader 2 (Password is 'TraderPass123!')
-INSERT INTO users (id, email, username, password_hash, role, is_active)
-VALUES (
-    'b0000000-0000-0000-0000-000000000002',
-    'priya@porulaxiom.local',
-    'trader_priya',
-    '$2b$12$0D951T9OWCaN9lkbfSiyGOuqYrrdRTwbtzgjLDPoWliu1shsxEsZm',
-    'USER',
-    true
-)
-ON CONFLICT (id) DO UPDATE SET password_hash = EXCLUDED.password_hash;
-
--- Account for Trader Priya (1,000,000 INR starting capital)
-INSERT INTO accounts (id, user_id, cash_balance, currency)
-VALUES (
-    'c0000000-0000-0000-0000-000000000002',
-    'b0000000-0000-0000-0000-000000000002',
-    1000000.0000,
-    'INR'
-)
-ON CONFLICT (user_id) DO NOTHING;
-
-INSERT INTO ledger_transactions (id, user_id, type, amount, balance_after, description, is_external_flow)
-VALUES (
-    'd0000000-0000-0000-0000-000000000002',
-    'b0000000-0000-0000-0000-000000000002',
-    'INITIAL_GRANT',
-    1000000.0000,
-    1000000.0000,
-    'Initial paper trading virtual balance grant',
-    true
-)
-ON CONFLICT DO NOTHING;
-
--- 5. Seed Friendship between Raj and Priya
-INSERT INTO friendships (requester_id, addressee_id, status)
-VALUES (
-    'b0000000-0000-0000-0000-000000000001',
-    'b0000000-0000-0000-0000-000000000002',
-    'ACCEPTED'
 )
 ON CONFLICT DO NOTHING;

@@ -4,7 +4,7 @@ def test_admin_cannot_cancel_user_orders(client):
     # 1. User creates a pending limit order
     u_login = client.post(
         "/api/auth/login",
-        json={"username_or_email": "trader_raj", "password": "TraderPass123!"},
+        json={"username_or_email": "trader_mokshit", "password": "TraderPass123!"},
     )
     u_token = u_login.json()["access_token"]
     u_headers = {"Authorization": f"Bearer {u_token}"}
@@ -39,7 +39,7 @@ def test_admin_capital_adjustment_creates_audit_log_and_ledger(client):
     a_token = a_login.json()["access_token"]
     a_headers = {"Authorization": f"Bearer {a_token}"}
 
-    # Perform capital adjustment of +₹200,000 for trader_raj
+    # Perform capital adjustment of +₹200,000 for trader_mokshit
     adjust_res = client.post(
         "/api/admin/capital-adjust",
         headers=a_headers,

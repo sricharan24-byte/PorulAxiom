@@ -39,7 +39,7 @@ function LoginForm() {
     }
   };
 
-  const handleDemo = async (type: "admin" | "trader1" | "trader2") => {
+  const handleDemo = async (type: "admin" | "trader") => {
     setError(null);
     setLoading(true);
     try {
@@ -118,7 +118,7 @@ function LoginForm() {
             className="input-field"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="e.g. trader_raj"
+            placeholder="e.g. trader_mokshit"
             required
           />
         </div>
@@ -159,29 +159,21 @@ function LoginForm() {
         <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", textAlign: "center", marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
           1-Click Demo Profiles
         </span>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
           <button
-            onClick={() => handleDemo("trader1")}
+            onClick={() => handleDemo("trader")}
             className="btn btn-outline"
-            style={{ fontSize: "0.75rem", padding: "8px 4px", flexDirection: "column", gap: "4px" }}
+            style={{ fontSize: "0.85rem", padding: "10px 8px", flexDirection: "column", gap: "6px" }}
           >
-            <Zap size={14} color="var(--color-brand)" />
-            Trader Raj
-          </button>
-          <button
-            onClick={() => handleDemo("trader2")}
-            className="btn btn-outline"
-            style={{ fontSize: "0.75rem", padding: "8px 4px", flexDirection: "column", gap: "4px" }}
-          >
-            <Zap size={14} color="var(--color-brand)" />
-            Trader Priya
+            <Zap size={16} color="var(--color-brand)" />
+            Trader Mokshit
           </button>
           <button
             onClick={() => handleDemo("admin")}
             className="btn btn-outline"
-            style={{ fontSize: "0.75rem", padding: "8px 4px", flexDirection: "column", gap: "4px", borderColor: "rgba(245, 158, 11, 0.4)" }}
+            style={{ fontSize: "0.85rem", padding: "10px 8px", flexDirection: "column", gap: "6px", borderColor: "rgba(245, 158, 11, 0.4)" }}
           >
-            <ShieldCheck size={14} color="#fbbf24" />
+            <ShieldCheck size={16} color="#fbbf24" />
             Sole Admin
           </button>
         </div>
