@@ -2,6 +2,7 @@
 
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
@@ -20,8 +21,14 @@ settings = get_settings()
 @router.post("/register", response_model=Token, status_code=status.HTTP_201_CREATED)
 def register(user_in: UserRegister, db: Session = Depends(get_db)):
     """Register a new user with standard USER role and initial paper balance."""
+    email_clean = user_in.email.strip().lower()
+    username_clean = user_in.username.strip()
+
     # Check if username or email already exists
-    existing_user = db.query(User).filter((User.email == user_in.email) | (User.username == user_in.username)).first()
+    existing_user = db.query(User).filter(
+        (func.lower(User.email) == email_clean) | (func.lower(User.username) == username_clean.lower())
+    ).first()
+
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -30,8 +37,8 @@ def register(user_in: UserRegister, db: Session = Depends(get_db)):
 
     # Invariant: Registered users ALWAYS get 'USER' role
     new_user = User(
-        email=user_in.email,
-        username=user_in.username,
+        email=email_clean,
+        username=username_clean,
         password_hash=get_password_hash(user_in.password),
         role="USER",
         is_active=True,
@@ -74,8 +81,9 @@ def register(user_in: UserRegister, db: Session = Depends(get_db)):
 @router.post("/login", response_model=Token)
 def login(login_in: UserLogin, db: Session = Depends(get_db)):
     """Authenticate user with username/email and password."""
+    identifier = login_in.username_or_email.strip().lower()
     user = db.query(User).filter(
-        (User.email == login_in.username_or_email) | (User.username == login_in.username_or_email)
+        (func.lower(User.email) == identifier) | (func.lower(User.username) == identifier)
     ).first()
 
     if not user or not verify_password(login_in.password, user.password_hash):
@@ -110,7 +118,7 @@ def get_me(current_user: User = Depends(get_current_active_user)):
 def demo_login(demo_type: str, db: Session = Depends(get_db)):
     """Quick 1-click login for demonstration: 'admin', 'trader1', or 'trader2'."""
     target_username = "admin" if demo_type == "admin" else ("trader_priya" if demo_type == "trader2" else "trader_raj")
-    user = db.query(User).filter(User.username == target_username).first()
+    user = db.query(User).filter(func.lower(User.username) == target_username.lower()).first()
 
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Demo account not found.")

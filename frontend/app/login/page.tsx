@@ -26,9 +26,10 @@ function LoginForm() {
 
     try {
       if (mode === "login") {
-        await login({ username_or_email: username || email, password });
+        const identifier = (username || email).trim();
+        await login({ username_or_email: identifier, password });
       } else {
-        await register({ email, username, password });
+        await register({ email: email.trim(), username: username.trim(), password });
       }
       router.push("/dashboard");
     } catch (err: any) {
