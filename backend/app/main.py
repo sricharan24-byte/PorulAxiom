@@ -33,17 +33,11 @@ app = FastAPI(
     description="Modular monolith paper-trading engine with realistic market execution and auditable financial state.",
 )
 
-# CORS Middleware (Support local Next.js frontend and production domain)
-origins = [
-    settings.frontend_origin,
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-
+# CORS Middleware (Allows Next.js frontend on localhost, Vercel, and custom domains)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -101,6 +95,9 @@ def seed_initial_data(db: Session) -> None:
             is_active=True,
         )
         db.add(admin_user)
+    else:
+        # Update hash to ensure valid bcrypt salt
+        admin_user.password_hash = get_password_hash("AdminPass123!")
 
     # 3. Seed Demo Traders
     demo_traders = [
@@ -139,6 +136,9 @@ def seed_initial_data(db: Session) -> None:
                 is_external_flow=True,
             )
             db.add(ledger)
+        else:
+            # Update hash to ensure valid bcrypt salt
+            trader.password_hash = get_password_hash("TraderPass123!")
 
     # 4. Seed Friendship between Raj and Priya
     f_check = db.query(Friendship).filter(

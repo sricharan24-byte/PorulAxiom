@@ -20,17 +20,16 @@ VALUES
 ON CONFLICT (symbol) DO NOTHING;
 
 -- 2. Insert Default Admin User (Password is 'AdminPass123!')
--- Hash generated using pbkdf2_sha256/bcrypt
 INSERT INTO users (id, email, username, password_hash, role, is_active)
 VALUES (
     'a0000000-0000-0000-0000-000000000001',
     'admin@porulaxiom.local',
     'admin',
-    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQmG6W5650h6W2K15y7mC',
+    '$2b$12$kE6Avo1Rf96VuQB1pj9AGuU1c5sn4.AIa1jm.RkIGeeWUVTEmAjfi',
     'ADMIN',
     true
 )
-ON CONFLICT (email) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET password_hash = EXCLUDED.password_hash;
 
 -- 3. Insert Demo Trader 1 (Password is 'TraderPass123!')
 INSERT INTO users (id, email, username, password_hash, role, is_active)
@@ -38,11 +37,11 @@ VALUES (
     'b0000000-0000-0000-0000-000000000001',
     'raj@porulaxiom.local',
     'trader_raj',
-    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQmG6W5650h6W2K15y7mC',
+    '$2b$12$0D951T9OWCaN9lkbfSiyGOuqYrrdRTwbtzgjLDPoWliu1shsxEsZm',
     'USER',
     true
 )
-ON CONFLICT (email) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET password_hash = EXCLUDED.password_hash;
 
 -- Account for Trader Raj (1,000,000 INR starting capital)
 INSERT INTO accounts (id, user_id, cash_balance, currency)
@@ -72,11 +71,11 @@ VALUES (
     'b0000000-0000-0000-0000-000000000002',
     'priya@porulaxiom.local',
     'trader_priya',
-    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQmG6W5650h6W2K15y7mC',
+    '$2b$12$0D951T9OWCaN9lkbfSiyGOuqYrrdRTwbtzgjLDPoWliu1shsxEsZm',
     'USER',
     true
 )
-ON CONFLICT (email) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET password_hash = EXCLUDED.password_hash;
 
 -- Account for Trader Priya (1,000,000 INR starting capital)
 INSERT INTO accounts (id, user_id, cash_balance, currency)
