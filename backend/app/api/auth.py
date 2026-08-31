@@ -77,7 +77,7 @@ def register(user_in: UserRegister, db: Session = Depends(get_db)):
             token_type="bearer",
             role=new_user.role,
             username=new_user.username,
-            user_id=new_user.id,
+            user_id=str(new_user.id),
         )
     except HTTPException:
         raise
@@ -116,7 +116,7 @@ def login(login_in: UserLogin, db: Session = Depends(get_db)):
             token_type="bearer",
             role=user.role,
             username=user.username,
-            user_id=user.id,
+            user_id=str(user.id),
         )
     except HTTPException:
         raise
@@ -150,7 +150,7 @@ def demo_login(demo_type: str, db: Session = Depends(get_db)):
             token_type="bearer",
             role=user.role,
             username=user.username,
-            user_id=user.id,
+            user_id=str(user.id),
         )
     except HTTPException:
         raise
