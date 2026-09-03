@@ -1,41 +1,39 @@
-/* ==============================================================================
-   PorulAxiom Dark Modern Fintech Design System
-   ============================================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* PorulAxiom - Institutional Trading Design System */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg-main: #090c10;
-  --bg-card: #0f141c;
-  --bg-card-hover: #151c27;
-  --bg-glass: rgba(15, 20, 28, 0.75);
-  --border-subtle: #1e2633;
-  --border-bright: #2d384d;
+  /* Color Palette - Deep Obsidian Institutional Theme */
+  --bg-obsidian: #08090c;
+  --bg-panel: #0f1218;
+  --bg-panel-hover: #161a23;
+  --bg-input: #12151d;
   
-  --text-primary: #f0f4fc;
+  --border-subtle: #1a1f2c;
+  --border-active: #2a3246;
+  
+  --color-primary: #0ea5e9;
+  --color-primary-glow: rgba(14, 165, 233, 0.15);
+  
+  --color-up: #00e676;
+  --color-up-bg: rgba(0, 230, 118, 0.1);
+  --color-up-border: rgba(0, 230, 118, 0.25);
+  
+  --color-down: #ff3b30;
+  --color-down-bg: rgba(255, 59, 48, 0.1);
+  --color-down-border: rgba(255, 59, 48, 0.25);
+  
+  --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   
-  --color-brand: #38bdf8;
-  --color-brand-glow: rgba(56, 189, 248, 0.15);
-  --color-accent: #818cf8;
+  /* Micro Radius Standards */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
   
-  --color-up: #10b981;
-  --color-up-bg: rgba(16, 185, 129, 0.12);
-  --color-down: #f43f5e;
-  --color-down-bg: rgba(244, 63, 94, 0.12);
-  
-  --color-gold: #f59e0b;
-  --color-silver: #94a3b8;
-  --color-bronze: #d97706;
-
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Tabular Fixed-Width Micro Typography */
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
 }
 
 * {
@@ -45,23 +43,27 @@
 }
 
 body {
-  background-color: var(--bg-main);
+  background-color: var(--bg-obsidian);
   color: var(--text-primary);
   font-family: var(--font-sans);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.03) 0%, transparent 40%);
-  background-attachment: fixed;
+  line-height: 1.4;
+  font-size: 14px;
 }
 
-/* Typography & Links */
+/* Enforce Fixed-Width Tabular Numbers to eliminate UI jitter */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--text-primary);
 }
 
 a {
@@ -69,217 +71,226 @@ a {
   text-decoration: none;
 }
 
-.mono {
-  font-family: var(--font-mono);
+/* Base Container */
+.container {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Glassmorphism card container */
+/* High-Density Panel Component */
 .glass-panel {
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-panel);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  transition: all 0.2s ease;
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease;
 }
 
 .glass-panel:hover {
-  border-color: var(--border-bright);
+  border-color: var(--border-active);
 }
 
-/* Buttons */
+/* High-Density Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  font-family: var(--font-sans);
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 10px 18px;
-  border-radius: var(--radius-md);
-  border: none;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  transition: all 0.15s ease;
+  user-select: none;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  background: var(--color-primary);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
 }
 
 .btn-primary:hover {
+  opacity: 0.9;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
 }
 
 .btn-buy {
-  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  background: var(--color-up);
+  color: #042911;
+  font-weight: 700;
 }
 
 .btn-buy:hover {
+  background: #26ed87;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
 .btn-sell {
-  background: linear-gradient(135deg, #e11d48 0%, #f43f5e 100%);
+  background: var(--color-down);
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.3);
+  font-weight: 700;
 }
 
 .btn-sell:hover {
+  background: #ff5247;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.4);
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-bright);
-  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--color-brand);
+  background: var(--bg-panel-hover);
+  border-color: var(--border-active);
+  color: var(--text-primary);
 }
 
 .btn-danger {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.3);
+  background: rgba(255, 59, 48, 0.15);
+  border: 1px solid var(--color-down-border);
   color: var(--color-down);
 }
 
 .btn-danger:hover {
-  background: rgba(244, 63, 94, 0.25);
+  background: var(--color-down);
+  color: #ffffff;
 }
 
-/* Form Inputs */
+/* Compact Input Fields */
 .input-field {
   width: 100%;
-  background: rgba(15, 20, 28, 0.9);
+  padding: 8px 12px;
+  background: var(--bg-input);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
+  font-size: 0.85rem;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.15s ease;
 }
 
 .input-field:focus {
-  border-color: var(--color-brand);
-  box-shadow: 0 0 0 2px var(--color-brand-glow);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-glow);
 }
 
-/* Badges & Tags */
+/* Institutional Badges */
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .badge-up {
   background: var(--color-up-bg);
+  border: 1px solid var(--color-up-border);
   color: var(--color-up);
-  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 .badge-down {
   background: var(--color-down-bg);
+  border: 1px solid var(--color-down-border);
   color: var(--color-down);
-  border: 1px solid rgba(244, 63, 94, 0.25);
 }
 
 .badge-admin {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
   border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
 }
 
 .badge-user {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid rgba(14, 165, 233, 0.3);
   color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.25);
 }
 
-/* Tables */
+/* High-Density Compact Data Tables */
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
+  font-size: 0.82rem;
 }
 
 .data-table th {
-  padding: 12px 16px;
+  text-align: left;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
   color: var(--text-muted);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .data-table td {
-  padding: 14px 16px;
-  border-bottom: 1px solid rgba(30, 38, 51, 0.5);
-  font-size: 0.9rem;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  vertical-align: middle;
 }
 
 .data-table tr:hover td {
-  background: rgba(255, 255, 255, 0.015);
+  background: var(--bg-panel-hover);
 }
 
 /* Layout Utilities */
-.container {
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 .flex-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.grid-dashboard {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
-}
-
-@media (max-width: 1024px) {
-  .grid-dashboard {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Animations */
-@keyframes pulseGreen {
-  0% { background-color: rgba(16, 185, 129, 0.4); }
+/* Live Quote Tick Animations */
+@keyframes tickUp {
+  0% { background-color: rgba(0, 230, 118, 0.3); }
   100% { background-color: transparent; }
 }
 
-@keyframes pulseRed {
-  0% { background-color: rgba(244, 63, 94, 0.4); }
+@keyframes tickDown {
+  0% { background-color: rgba(255, 59, 48, 0.3); }
   100% { background-color: transparent; }
 }
 
-.tick-up {
-  animation: pulseGreen 0.8s ease-out;
+.tick-flash-up {
+  animation: tickUp 0.6s ease-out;
 }
 
-.tick-down {
-  animation: pulseRed 0.8s ease-out;
+.tick-flash-down {
+  animation: tickDown 0.6s ease-out;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-obsidian);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }

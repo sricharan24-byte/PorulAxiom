@@ -34,22 +34,18 @@ export default function HomePage() {
         gap: "20px",
       }}>
         <div className="badge badge-user" style={{ padding: "6px 14px", fontSize: "0.8rem" }}>
-          <Zap size={14} /> HIGH FIDELITY PAPER TRADING PLATFORM
+          <Activity size={14} /> PAPER TRADING PLATFORM
         </div>
 
         <h1 style={{ fontSize: "3.2rem", maxWidth: "840px", lineHeight: 1.15, fontWeight: 800 }}>
-          Trade Real Markets With <br />
-          <span style={{
-            background: "linear-gradient(135deg, #38bdf8 0%, #818cf8 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}>
-            Auditable Virtual Precision.
+          Realistic Virtual Stock Market <br />
+          <span style={{ color: "var(--color-brand)" }}>
+            and Paper Trading Platform
           </span>
         </h1>
 
         <p style={{ color: "var(--text-secondary)", fontSize: "1.15rem", maxWidth: "680px" }}>
-          Experience realistic market execution with ₹10,00,000 in virtual capital. Strict immutable financial ledgers, zero artificial price slippage, and friends-only return rankings.
+          Trade with virtual money using real market data. The core product provides a realistic trading simulation with supporting features like virtual cash and friend competition.
         </p>
 
         <div style={{ display: "flex", gap: "14px", marginTop: "10px" }}>
@@ -141,15 +137,22 @@ export default function HomePage() {
         </div>
 
         <div className="glass-panel" style={{ padding: "28px" }}>
-          <div style={{ width: "42px", height: "42px", borderRadius: "10px", background: "rgba(16, 185, 129, 0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+          <div style={{ width: "42px", height: "42px", borderRadius: "4px", background: "rgba(16, 185, 129, 0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
             <ShieldCheck size={22} color="var(--color-up)" />
           </div>
-          <h3 style={{ fontSize: "1.2rem", marginBottom: "8px" }}>Single Admin Invariant</h3>
+          <h3 style={{ fontSize: "1.2rem", marginBottom: "8px" }}>Single Admin Account</h3>
           <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
-            Authoritative security rules strictly prohibit secondary admins. Admin can never view passwords or alter user trading records.
+            Security rules strictly prohibit secondary admins. The admin cannot view passwords or alter user trading records.
           </p>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer style={{ marginTop: "40px", paddingTop: "20px", borderTop: "1px solid var(--border-subtle)", textAlign: "center", fontSize: "0.85rem", color: "var(--text-muted)", display: "flex", justifyContent: "center", gap: "20px" }}>
+        <span>&copy; {new Date().getFullYear()} PorulAxiom.</span>
+        <Link href="/privacy" style={{ textDecoration: "underline" }}>Privacy Policy</Link>
+        <Link href="/terms" style={{ textDecoration: "underline" }}>Terms & Conditions</Link>
+      </footer>
     </div>
   );
 }

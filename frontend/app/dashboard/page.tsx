@@ -56,7 +56,7 @@ export default function DashboardPage() {
   if (authLoading || (loading && !portfolio)) {
     return (
       <div className="container" style={{ textAlign: "center", padding: "100px 0" }}>
-        <p style={{ color: "var(--text-muted)" }}>Loading portfolio valuation...</p>
+        <p className="mono" style={{ color: "var(--text-muted)", fontSize: "0.85rem" }}>Loading portfolio valuation...</p>
       </div>
     );
   }
@@ -65,77 +65,77 @@ export default function DashboardPage() {
   const isPnlPos = (portfolio?.total_unrealized_pnl ?? 0) >= 0;
 
   return (
-    <div className="container" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+    <div className="container" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       {/* User Visible Net Worth Adjustment Notification */}
       <NotificationBadge />
 
       {/* Top Metric Cards */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "14px" }}>
         {/* Net Worth Card */}
-        <div className="glass-panel" style={{ padding: "20px" }}>
+        <div className="glass-panel" style={{ padding: "16px" }}>
           <div className="flex-between">
-            <span style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 600 }}>TOTAL NET WORTH</span>
-            <Wallet size={18} color="var(--color-brand)" />
+            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 700, letterSpacing: "0.03em" }}>TOTAL NET WORTH</span>
+            <Wallet size={16} color="var(--color-primary)" />
           </div>
-          <div className="mono" style={{ fontSize: "1.8rem", fontWeight: 800, marginTop: "8px" }}>
+          <div className="mono" style={{ fontSize: "1.6rem", fontWeight: 800, marginTop: "6px" }}>
             ₹{portfolio?.net_worth.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "6px" }}>
-            <span className={`badge ${isReturnPos ? "badge-up" : "badge-down"}`}>
+            <span className={`badge ${isReturnPos ? "badge-up" : "badge-down"}`} style={{ fontSize: "0.68rem" }}>
               {isReturnPos ? "+" : ""}{portfolio?.return_percentage.toFixed(2)}%
             </span>
-            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Time-Weighted Return</span>
+            <span style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>Time-Weighted Return</span>
           </div>
         </div>
 
         {/* Available Cash Card */}
-        <div className="glass-panel" style={{ padding: "20px" }}>
+        <div className="glass-panel" style={{ padding: "16px" }}>
           <div className="flex-between">
-            <span style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 600 }}>AVAILABLE PAPER CASH</span>
-            <span className="badge badge-up" style={{ fontSize: "0.65rem" }}>LIQUID</span>
+            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 700, letterSpacing: "0.03em" }}>AVAILABLE CASH</span>
+            <span className="badge badge-up" style={{ fontSize: "0.62rem" }}>LIQUID</span>
           </div>
-          <div className="mono" style={{ fontSize: "1.8rem", fontWeight: 800, marginTop: "8px" }}>
+          <div className="mono" style={{ fontSize: "1.6rem", fontWeight: 800, marginTop: "6px" }}>
             ₹{portfolio?.cash_balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div style={{ fontSize: "0.8rem", color: "var(--text-secondary)", marginTop: "6px" }}>
-            Invested: <strong className="mono">₹{portfolio?.invested_value.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "6px" }}>
+            Invested Capital: <strong className="mono" style={{ color: "var(--text-primary)" }}>₹{portfolio?.invested_value.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>
           </div>
         </div>
 
         {/* Unrealized P&L Card */}
-        <div className="glass-panel" style={{ padding: "20px" }}>
+        <div className="glass-panel" style={{ padding: "16px" }}>
           <div className="flex-between">
-            <span style={{ fontSize: "0.85rem", color: "var(--text-muted)", fontWeight: 600 }}>UNREALIZED P&L</span>
-            {isPnlPos ? <ArrowUpRight size={18} color="var(--color-up)" /> : <ArrowDownRight size={18} color="var(--color-down)" />}
+            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: 700, letterSpacing: "0.03em" }}>UNREALIZED P&L</span>
+            {isPnlPos ? <ArrowUpRight size={16} color="var(--color-up)" /> : <ArrowDownRight size={16} color="var(--color-down)" />}
           </div>
-          <div className="mono" style={{ fontSize: "1.8rem", fontWeight: 800, marginTop: "8px", color: isPnlPos ? "var(--color-up)" : "var(--color-down)" }}>
+          <div className="mono" style={{ fontSize: "1.6rem", fontWeight: 800, marginTop: "6px", color: isPnlPos ? "var(--color-up)" : "var(--color-down)" }}>
             {isPnlPos ? "+" : ""}₹{portfolio?.total_unrealized_pnl.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "6px" }}>
-            Current Holdings Value: <strong className="mono" style={{ color: "var(--text-primary)" }}>₹{portfolio?.current_holdings_value.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>
+          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "6px" }}>
+            Holdings Valuation: <strong className="mono" style={{ color: "var(--text-primary)" }}>₹{portfolio?.current_holdings_value.toLocaleString(undefined, { maximumFractionDigits: 2 })}</strong>
           </div>
         </div>
       </div>
 
-      {/* Main Grid: Holdings & Allocation */}
-      <div className="grid-dashboard">
-        {/* Holdings Table */}
-        <div className="glass-panel" style={{ padding: "20px" }}>
-          <div className="flex-between" style={{ marginBottom: "16px" }}>
-            <h3 style={{ fontSize: "1.1rem", display: "flex", alignItems: "center", gap: "8px" }}>
-              <BarChart2 size={18} color="var(--color-brand)" />
-              Active Holdings ({portfolio?.holdings.length || 0})
+      {/* Main Grid: Active Holdings & Asset Allocation */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: "16px" }}>
+        {/* Active Holdings Table */}
+        <div className="glass-panel" style={{ padding: "16px" }}>
+          <div className="flex-between" style={{ marginBottom: "12px" }}>
+            <h3 style={{ fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "6px", fontWeight: 700 }}>
+              <BarChart2 size={16} color="var(--color-primary)" />
+              ACTIVE HOLDINGS ({portfolio?.holdings.length || 0})
             </h3>
-            <Link href="/trade" className="btn btn-primary" style={{ padding: "6px 12px", fontSize: "0.8rem" }}>
-              Trade Stock
+            <Link href="/trade" className="btn btn-primary" style={{ padding: "5px 10px", fontSize: "0.78rem" }}>
+              Trade Workstation →
             </Link>
           </div>
 
           {portfolio?.holdings.length === 0 ? (
             <div style={{ textAlign: "center", padding: "40px 0", color: "var(--text-muted)" }}>
-              <p>No active positions yet.</p>
-              <Link href="/trade" style={{ color: "var(--color-brand)", fontSize: "0.9rem", fontWeight: 600, display: "inline-block", marginTop: "8px" }}>
-                Place your first simulated trade →
+              <p style={{ fontSize: "0.85rem" }}>No active stock positions in your portfolio.</p>
+              <Link href="/trade" style={{ color: "var(--color-primary)", fontSize: "0.82rem", fontWeight: 600, display: "inline-block", marginTop: "8px" }}>
+                Execute your first paper trade →
               </Link>
             </div>
           ) : (
@@ -144,10 +144,10 @@ export default function DashboardPage() {
                 <tr>
                   <th>Instrument</th>
                   <th>Quantity</th>
-                  <th>Avg Buy</th>
+                  <th>Avg Price</th>
                   <th>LTP</th>
                   <th>Current Val</th>
-                  <th style={{ textAlign: "right" }}>P&L</th>
+                  <th style={{ textAlign: "right" }}>Unrealized P&L</th>
                 </tr>
               </thead>
               <tbody>
@@ -157,10 +157,10 @@ export default function DashboardPage() {
                     <tr key={h.id}>
                       <td>
                         <div>
-                          <Link href={`/trade?symbol=${h.symbol}`} style={{ fontWeight: 700, color: "var(--color-brand)" }}>
+                          <Link href={`/trade?symbol=${h.symbol}`} className="mono" style={{ fontWeight: 700, color: "var(--color-primary)" }}>
                             {h.symbol}
                           </Link>
-                          <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{h.name}</div>
+                          <div style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>{h.name}</div>
                         </div>
                       </td>
                       <td className="mono">{h.quantity}</td>
@@ -180,8 +180,8 @@ export default function DashboardPage() {
           )}
         </div>
 
-        {/* Right Column: Asset Allocation & Quick Recent Orders */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+        {/* Right Column: Asset Allocation Chart & Recent Orders */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {portfolio && (
             <PortfolioChart
               cashBalance={portfolio.cash_balance}
@@ -190,33 +190,33 @@ export default function DashboardPage() {
             />
           )}
 
-          {/* Recent Orders List */}
-          <div className="glass-panel" style={{ padding: "20px" }}>
-            <h4 style={{ fontSize: "1rem", marginBottom: "12px", display: "flex", alignItems: "center", gap: "6px" }}>
-              <ShoppingBag size={16} color="var(--color-brand)" />
-              Recent Orders
+          {/* Recent Orders Stream */}
+          <div className="glass-panel" style={{ padding: "16px" }}>
+            <h4 style={{ fontSize: "0.85rem", marginBottom: "10px", display: "flex", alignItems: "center", gap: "6px", fontWeight: 700, color: "var(--text-muted)" }}>
+              <ShoppingBag size={14} color="var(--color-primary)" />
+              RECENT ORDERS STREAM
             </h4>
             {recentOrders.length === 0 ? (
-              <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>No recent orders placed.</p>
+              <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>No recent orders.</p>
             ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                 {recentOrders.map((o) => (
                   <div key={o.id} className="flex-between" style={{
-                    padding: "8px 12px",
-                    background: "rgba(15, 20, 28, 0.6)",
+                    padding: "6px 10px",
+                    background: "var(--bg-input)",
                     border: "1px solid var(--border-subtle)",
-                    borderRadius: "var(--radius-md)",
-                    fontSize: "0.85rem",
+                    borderRadius: "var(--radius-sm)",
+                    fontSize: "0.8rem",
                   }}>
                     <div>
-                      <span className={`badge ${o.side === "BUY" ? "badge-up" : "badge-down"}`} style={{ fontSize: "0.65rem", marginRight: "6px" }}>
+                      <span className={`badge ${o.side === "BUY" ? "badge-up" : "badge-down"}`} style={{ fontSize: "0.62rem", marginRight: "6px", padding: "0 3px" }}>
                         {o.side}
                       </span>
                       <strong className="mono">{o.quantity} {o.symbol}</strong>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                       <span className="mono">₹{o.price.toFixed(2)}</span>
-                      <span className="badge" style={{ background: "rgba(255, 255, 255, 0.05)", color: "var(--text-muted)", fontSize: "0.65rem" }}>
+                      <span className="badge" style={{ background: "rgba(255, 255, 255, 0.05)", color: "var(--text-muted)", fontSize: "0.62rem" }}>
                         {o.status}
                       </span>
                     </div>
