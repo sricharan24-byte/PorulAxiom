@@ -96,7 +96,7 @@ function TradeTerminalContent() {
       const payload: any = {
         symbol: selectedSymbol,
         side,
-        type: orderType,
+        order_type: orderType,
         quantity: Number(quantity),
       };
 
